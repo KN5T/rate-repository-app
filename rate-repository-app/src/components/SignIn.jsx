@@ -3,6 +3,8 @@ import Text from "./Text"
 import { useFormik } from "formik"
 import theme from "../theme"
 import * as yup from "yup"
+import useSignIn from "../hooks/useSignIn"
+import { useNavigate } from "react-router-dom"
 
 const styles = StyleSheet.create({
   container: {
@@ -41,13 +43,25 @@ const validationSchema = yup.object().shape({
 })
 
 const SignIn = () => {
+  const [signIn] = useSignIn()
+  const navigate = useNavigate()
+
   const initialValues = {
     username: "",
     password: "",
   }
 
-  const onSubmit = (values) => {
+  const onSubmit = async (values) => {
     console.log("submit", values)
+    const { username, password } = values
+
+    try {
+      const { data } = await signIn({ username, password })
+      console.log("data", data)
+      navigate("/")
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   const formik = useFormik({
