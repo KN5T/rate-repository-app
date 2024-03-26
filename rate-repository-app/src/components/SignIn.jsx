@@ -52,7 +52,6 @@ const SignIn = () => {
   }
 
   const onSubmit = async (values) => {
-    console.log("submit", values)
     const { username, password } = values
 
     try {

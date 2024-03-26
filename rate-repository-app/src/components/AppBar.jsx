@@ -26,10 +26,9 @@ const AppBar = () => {
   const authStorage = useAuthStorage()
   const { data } = useQuery(GET_USER)
 
-  console.log("data", data)
+  const user = (data && data.me) ? data.me : null
 
   const signOut = async () => {
-    console.log("sign out")
     await authStorage.removeAccessToken()
     apolloClient.resetStore()
   }
@@ -38,15 +37,15 @@ const AppBar = () => {
     <View style={styles.container}>
       <ScrollView horizontal contentContainerStyle={styles.scrollView}>
         <AppBarTab style={styles.barItem} name={"Repositories"} linkTo="/" />
-        {data && (
+        {user && (
           <AppBarTab
             style={styles.barItem}
             name={"Sign out"}
             linkTo="/"
-            onPress={signOut}
+            handlePress={signOut}
           />
         )}
-        {data && (
+        {!user && (
           <AppBarTab style={styles.barItem} name={"Sign in"} linkTo="/sign" />
         )}
       </ScrollView>
