@@ -1,8 +1,6 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react-native';
 import SignInForm from '../../components/SignIn/SignInForm';
 
-// ...
-
 describe('SignIn', () => {
   describe('SignInForm', () => {
     it('calls onSubmit function with correct arguments when a valid form is submitted', async () => {

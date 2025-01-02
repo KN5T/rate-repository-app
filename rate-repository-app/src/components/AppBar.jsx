@@ -17,7 +17,8 @@ const styles = StyleSheet.create({
   barItem: {
     color: "#ffffff",
     fontSize: 18,
-    padding: 30,
+    paddingVertical: 30,
+    paddingHorizontal: 15
   },
 })
 
@@ -38,15 +39,30 @@ const AppBar = () => {
       <ScrollView horizontal contentContainerStyle={styles.scrollView}>
         <AppBarTab style={styles.barItem} name={"Repositories"} linkTo="/" />
         {user && (
-          <AppBarTab
-            style={styles.barItem}
-            name={"Sign out"}
-            linkTo="/"
-            handlePress={signOut}
-          />
+          <>
+            <AppBarTab
+              style={styles.barItem}
+              name={"Create a review"}
+              linkTo="/review"
+            />
+            <AppBarTab
+              style={styles.barItem}
+              name={"My reviews"}
+              linkTo="/myReviews"
+            />
+            <AppBarTab
+              style={styles.barItem}
+              name={"Sign out"}
+              linkTo="/"
+              handlePress={signOut}
+            />
+          </>
         )}
         {!user && (
-          <AppBarTab style={styles.barItem} name={"Sign in"} linkTo="/sign" />
+          <>
+            <AppBarTab style={styles.barItem} name={"Sign in"} linkTo="/sign" />
+            <AppBarTab style={styles.barItem} name={"Sign up"} linkTo="/signUp" />
+          </>
         )}
       </ScrollView>
     </View>
